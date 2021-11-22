@@ -6,6 +6,9 @@ import com.example.demo.domain.productdomain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+import java.util.Optional;
+
 @Repository
 public class ProductRepositoryJPAImp implements ProductRepository{
     
@@ -20,7 +23,11 @@ public class ProductRepositoryJPAImp implements ProductRepository{
         this.productRepositoryJPA.save(product);
     }
 
-    //@Override
+    public Optional<Product> findById(UUID id){
+        return this.productRepositoryJPA.findById(id);
+    }
+
+    @Override
     public boolean exists(String name){
         return this.productRepositoryJPA.exists(name);
     }
