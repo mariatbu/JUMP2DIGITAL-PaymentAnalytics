@@ -8,18 +8,23 @@ import com.example.demo.domain.productdomain.ProductRepository;
 import com.example.demo.dto.productdto.*;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductApplicationImp extends ApplicationBase<Product, UUID> implements ProductApplication {
     
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
+    private final Logger logger;
 
     @Autowired
-    public ProductApplicationImp(final ProductRepository productRepository, final ModelMapper modelMapper){
+    public ProductApplicationImp(final ProductRepository productRepository, final ModelMapper modelMapper, final Logger logger){
         super((id)-> productRepository.findById(id));
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
+        this.logger = logger;
     }
 
     @Override
@@ -28,6 +33,7 @@ public class ProductApplicationImp extends ApplicationBase<Product, UUID> implem
         product.setId(UUID.randomUUID());
         product.validate("name", product.getName(), (name)-> this.productRepository.exists(name));
         this.productRepository.create(product);
+        this.logger.info(this.serializeObject(product, "created"));
         return this.modelMapper.map(product, ProductDTO.class);
     }
 }

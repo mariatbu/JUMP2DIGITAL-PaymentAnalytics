@@ -11,5 +11,5 @@ public interface ProductProjection {
 
     BigDecimal getPrice();
 
-    ProductType getDescription(); //TODO: See if this is a String
+    String getDescription();
 }

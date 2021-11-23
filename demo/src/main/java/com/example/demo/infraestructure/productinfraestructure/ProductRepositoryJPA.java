@@ -18,7 +18,7 @@ public interface ProductRepositoryJPA extends JpaRepository<Product, UUID> {
     @Query(sqlSelect)
 
     List<ProductProjection> findByCriteria(@Param("name") String name, Pageable pageable);
-    final String sqlExists = "SELECT case WHEN count(i)>0 then true else false end FROM Product p where p.name=:name";
+    final String sqlExists = "SELECT case WHEN count(p)>0 then true else false end FROM Product p where p.name=:name";
     @Query(sqlExists)
     boolean exists(@Param("name") String name);
 }
