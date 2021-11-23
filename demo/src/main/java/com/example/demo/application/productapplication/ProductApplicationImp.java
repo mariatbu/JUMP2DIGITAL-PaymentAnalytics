@@ -51,4 +51,11 @@ public class ProductApplicationImp extends ApplicationBase<Product, UUID> implem
         logger.info(this.serializeObject(product, "updated"));
         return this.modelMapper.map(product, ProductDTO.class);
     }
+
+    @Override
+    public void delete(UUID id){
+        Product product = this.findById(id);
+        this.productRepository.delete(product);
+        logger.info(this.serializeObject(product, "deleted"));
+    }
 }

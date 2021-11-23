@@ -7,4 +7,5 @@ import java.util.UUID;
 public interface ProductRepositoryWritable extends FindById<Product, UUID>, ExistsByField{
     public void create(Product product);
     public void update(Product product);
+    public void delete(Product product);
 }

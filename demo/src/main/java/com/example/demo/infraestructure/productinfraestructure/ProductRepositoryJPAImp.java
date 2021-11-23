@@ -36,4 +36,9 @@ public class ProductRepositoryJPAImp implements ProductRepository{
     public void update(Product product){
         this.productRepositoryJPA.save(product);
     }
+
+    @Override
+    public void delete(Product product){
+        this.productRepositoryJPA.delete(product);
+    }
 }

@@ -9,4 +9,5 @@ public interface ProductApplication {
     
     public ProductDTO create(CreateUpdateProductDTO dto);
     public ProductDTO update(UUID id, CreateUpdateProductDTO dto);
+    public void delete(UUID id);
 }
