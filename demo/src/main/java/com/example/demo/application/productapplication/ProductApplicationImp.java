@@ -1,9 +1,11 @@
 package com.example.demo.application.productapplication;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.example.demo.core.ApplicationBase;
 import com.example.demo.domain.productdomain.Product;
+import com.example.demo.domain.productdomain.ProductProjection;
 import com.example.demo.domain.productdomain.ProductRepository;
 import com.example.demo.dto.productdto.*;
 
@@ -57,5 +59,16 @@ public class ProductApplicationImp extends ApplicationBase<Product, UUID> implem
         Product product = this.findById(id);
         this.productRepository.delete(product);
         logger.info(this.serializeObject(product, "deleted"));
+    }
+
+    @Override
+    public ProductDTO get(UUID id){
+        Product product = this.findById(id);
+        return this.modelMapper.map(product, ProductDTO.class);
+    }
+
+    @Override
+    public List<ProductProjection> getAll(String name, int size, int page) {
+        return this.productRepository.getAll(name, page, size);
     }
 }

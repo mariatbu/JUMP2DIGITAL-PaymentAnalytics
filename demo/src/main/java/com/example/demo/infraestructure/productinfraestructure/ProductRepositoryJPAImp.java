@@ -1,13 +1,16 @@
 package com.example.demo.infraestructure.productinfraestructure;
 
-import com.example.demo.domain.productdomain.ProductRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import com.example.demo.domain.productdomain.Product;
+import com.example.demo.domain.productdomain.ProductProjection;
+import com.example.demo.domain.productdomain.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
-
-import java.util.UUID;
-import java.util.Optional;
 
 @Repository
 public class ProductRepositoryJPAImp implements ProductRepository{
@@ -40,5 +43,10 @@ public class ProductRepositoryJPAImp implements ProductRepository{
     @Override
     public void delete(Product product){
         this.productRepositoryJPA.delete(product);
+    }
+
+    @Override
+    public List<ProductProjection> getAll(String name, int page, int size){
+        return this.productRepositoryJPA.findByCriteria(name, PageRequest.of(page, size));
     }
 }
