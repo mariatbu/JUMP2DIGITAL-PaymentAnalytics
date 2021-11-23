@@ -11,6 +11,7 @@ import javax.validation.constraints.DecimalMin;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.demo.core.EntityBase;
+import com.example.demo.core.validators.ValueOfEnum;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

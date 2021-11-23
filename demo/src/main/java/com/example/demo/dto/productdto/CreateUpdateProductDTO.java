@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 
+import com.example.demo.core.validators.ValueOfEnum;
+import com.example.demo.domain.productdomain.ProductType;
+
 import org.springframework.validation.annotation.Validated;
 
 import lombok.Getter;
@@ -21,5 +24,6 @@ public @Getter @Setter @NoArgsConstructor class CreateUpdateProductDTO {
     private BigDecimal price;
 
     @NotBlank
+    @ValueOfEnum(enumClass = ProductType.class)
     private String description;
 }
