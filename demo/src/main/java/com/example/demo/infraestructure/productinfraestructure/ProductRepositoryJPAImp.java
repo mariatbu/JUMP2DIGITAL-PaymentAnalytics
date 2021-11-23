@@ -31,4 +31,9 @@ public class ProductRepositoryJPAImp implements ProductRepository{
     public boolean exists(String name){
         return this.productRepositoryJPA.exists(name);
     }
+
+    @Override
+    public void update(Product product){
+        this.productRepositoryJPA.save(product);
+    }
 }

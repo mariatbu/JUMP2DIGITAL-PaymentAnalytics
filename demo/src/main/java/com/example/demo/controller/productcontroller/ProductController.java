@@ -1,20 +1,23 @@
 package com.example.demo.controller.productcontroller;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
-import com.example.demo.dto.productdto.ProductDTO;
+import com.example.demo.application.productapplication.ProductApplication;
 import com.example.demo.dto.productdto.CreateUpdateProductDTO;
+import com.example.demo.dto.productdto.ProductDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import com.example.demo.application.productapplication.ProductApplication;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,5 +35,11 @@ public class ProductController {
     public ResponseEntity<?> create(@RequestBody @Valid final CreateUpdateProductDTO dto){
         ProductDTO productDTO = this.productApplication.create(dto);
         return ResponseEntity.status(201).body(productDTO);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    public ResponseEntity<?> update(@PathVariable UUID id, @Valid @RequestBody CreateUpdateProductDTO dto){
+        ProductDTO productDTO = this.productApplication.update(id, dto);
+        return ResponseEntity.ok(productDTO);
     }
 }

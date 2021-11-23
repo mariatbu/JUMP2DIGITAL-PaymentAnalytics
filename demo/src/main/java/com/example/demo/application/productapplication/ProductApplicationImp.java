@@ -36,4 +36,19 @@ public class ProductApplicationImp extends ApplicationBase<Product, UUID> implem
         this.logger.info(this.serializeObject(product, "created"));
         return this.modelMapper.map(product, ProductDTO.class);
     }
+
+    @Override
+    public ProductDTO update(UUID id, CreateUpdateProductDTO dto){
+        Product product = this.findById(id);
+        if(product.getName().equals(dto.getName())){
+            this.modelMapper.map(dto, product);
+            product.validate();
+        }else{
+            this.modelMapper.map(dto, product);
+            product.validate("name", product.getName(), (name)-> this.productRepository.exists(name));
+        }
+        this.productRepository.update(product);
+        logger.info(this.serializeObject(product, "updated"));
+        return this.modelMapper.map(product, ProductDTO.class);
+    }
 }
