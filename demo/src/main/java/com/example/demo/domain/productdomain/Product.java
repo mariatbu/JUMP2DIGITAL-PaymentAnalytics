@@ -5,13 +5,12 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.DecimalMin;
-
-import org.springframework.validation.annotation.Validated;
+import javax.validation.constraints.NotBlank;
 
 import com.example.demo.core.EntityBase;
-import com.example.demo.core.validators.ValueOfEnum;
+
+import org.springframework.validation.annotation.Validated;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
